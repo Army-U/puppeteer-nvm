@@ -8,9 +8,8 @@ RUN yum install -y wget && \
 
 ENV NVM_DIR /usr/local/nvm
 
-RUN mkdir -p $NVM_DIR
-
-RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+RUN mkdir -p $NVM_DIR && \
+    curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
 ENV NODE_VERSION 10.12.0
 
@@ -22,9 +21,7 @@ RUN source $NVM_DIR/nvm.sh && \
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-RUN node -v
-RUN npm -v
-
-RUN npm install -g yarn
-
-RUN yarn --version
+RUN node -v && \
+    npm -v && \
+    npm install -g yarn && \
+    yarn --version
